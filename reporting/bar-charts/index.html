@@ -1417,7 +1417,7 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Number of Applications&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">)</span>
 </code></pre></div>
-<img alt="Single-series bar chart of tax credit applications by year" src="reporting/img/basic_usage.png`" /></p>
+<img alt="Single-series bar chart of tax credit applications by year" src="../img/basic_usage.png" /></p>
 <h3 id="grouped-bars-multiple-columns">Grouped bars (multiple columns)<a class="headerlink" href="#grouped-bars-multiple-columns" title="Permanent link">&para;</a></h3>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s2">&quot;Year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">2022</span><span class="p">,</span> <span class="mi">2023</span><span class="p">],</span>
@@ -1435,7 +1435,7 @@
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;tab10&quot;</span><span class="p">,</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="p">)</span>
 </code></pre></div>
-<img alt="Multi-series bar chart showing grouped bars with color palette defined." src="img/grouped_bars.png`" /></p>
+<img alt="Multi-series bar chart showing grouped bars with color palette defined." src="../img/grouped_bars.png" /></p>
 <h3 id="stacked-bars-with-value-annotations">Stacked bars with value annotations<a class="headerlink" href="#stacked-bars-with-value-annotations" title="Permanent link">&para;</a></h3>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">gc</span><span class="o">.</span><span class="n">create_bar_chart_from_df</span><span class="p">(</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">df</span><span class="p">,</span>
@@ -1449,7 +1449,7 @@
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set1&quot;</span><span class="p">,</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">)</span>
 </code></pre></div>
-<img alt="Multi-series bar chart showing stacked bars with palette defined." src="img/stacked_with_annotations.png`" /></p>
+<img alt="Multi-series bar chart showing stacked bars with palette defined." src="../img/stacked_with_annotations.png" /></p>
 <h3 id="adding-a-trendline">Adding a trendline<a class="headerlink" href="#adding-a-trendline" title="Permanent link">&para;</a></h3>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">gc</span><span class="o">.</span><span class="n">create_bar_chart_from_df</span><span class="p">(</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">df</span><span class="p">,</span>
@@ -1463,7 +1463,7 @@
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">trendline_palette</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">],</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">)</span>
 </code></pre></div>
-<img alt="Single-series bar chart of tax credit applications by year with trendline" src="img/adding_trendline.png`" /></p>
+<img alt="Single-series bar chart of tax credit applications by year with trendline" src="../img/adding_trendline.png" /></p>
 <h3 id="custom-theming">Custom theming<a class="headerlink" href="#custom-theming" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">gc</span><span class="o">.</span><span class="n">create_bar_chart_from_df</span><span class="p">(</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">df</span><span class="p">,</span>
@@ -1482,7 +1482,7 @@
 <a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="n">tick_font_size</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
 <a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="p">)</span>
 </code></pre></div>
-<p><img alt="Multi-Series bar chart with grouped bars and custom theming" src="img/custom_theming.png`" /></p>
+<p><img alt="Multi-Series bar chart with grouped bars and custom theming" src="../img/custom_theming.png" /></p>
 <h2 id="parameter-reference">Parameter reference<a class="headerlink" href="#parameter-reference" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
