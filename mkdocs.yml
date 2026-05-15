@@ -1,6 +1,7 @@
 site_name: Helper Functions
 site_description: Python utilities for auditing commercial historic tax credit data
 site_author: Travis Magaluk
+site_url: https://travis-magaluk.github.io/Helper_Functions/
 docs_dir: docs
 
 theme:
