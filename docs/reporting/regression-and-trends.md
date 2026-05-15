@@ -36,7 +36,7 @@ print(stats["Part1_Apps"])
 # {'slope': 9.94, 'intercept': -19924.8, 'p_value': 0.003, 'r_squared': 0.87}
 ```
 
-![Multi-series scatter plot with trendlines](img/regression_basic.png`)
+![Multi-series scatter plot with trendlines](img/regression_basic.png)
 
 ### With connecting lines (time series)
 
@@ -52,7 +52,7 @@ stats = ra.regression_analysis_2(
 )
 ```
 
-![Multi-series scatter plot with trendlines and connecting lines](img/connecting_lines.png`)
+![Multi-series scatter plot with trendlines and connecting lines](img/connecting_lines.png)
 
 ### Custom colors and theming
 
@@ -69,7 +69,7 @@ stats = ra.regression_analysis_2(
     grid_color="#DDDDDD",
 )
 ```
-![Multi-series scatter plot with trendlines and custom theming](img/reg_custom_colors.png`)
+![Multi-series scatter plot with trendlines and custom theming](img/reg_custom_colors.png)
 
 ### Return value
 
@@ -152,7 +152,7 @@ Combines `analyze_trends()` and `regression_analysis_2()` into a single call —
 
 Any keyword argument accepted by `regression_analysis_2()` can be passed via `**kwargs`.
 
-![Top 3 Program Trends](img/top3_trends.png`)
+![Top 3 Program Trends](img/top3_trends.png)
 
 ### Parameters
 

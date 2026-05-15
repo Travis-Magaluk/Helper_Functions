@@ -34,7 +34,7 @@ gc.create_bar_chart_from_df(
 )
 ```
 
-![Basic Bar Chart](img/Quick_Example_Bar.png`)
+![Basic Bar Chart](img/Quick_Example_Bar.png)
 
 
 ```python
@@ -45,7 +45,7 @@ stats = ra.regression_analysis_2(
 )
 print(stats)
 ```
-![Basic Scatter Plot with Trend Line](img/Quick_Example_Line.png`)
+![Basic Scatter Plot with Trend Line](img/Quick_Example_Line.png)
 
 ## See also
 

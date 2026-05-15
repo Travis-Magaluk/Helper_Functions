@@ -25,7 +25,7 @@ gc.create_bar_chart_from_df(
     ylabel="Number of Applications",
 )
 ```
-![Single-series bar chart of tax credit applications by year](reporting/img/basic_usage.png`)
+![Single-series bar chart of tax credit applications by year](img/basic_usage.png)
 
 ### Grouped bars (multiple columns)
 
@@ -46,7 +46,7 @@ gc.create_bar_chart_from_df(
     palette="tab10",
 )
 ```
-![Multi-series bar chart showing grouped bars with color palette defined.](img/grouped_bars.png`)
+![Multi-series bar chart showing grouped bars with color palette defined.](img/grouped_bars.png)
 
 ### Stacked bars with value annotations
 
@@ -63,7 +63,7 @@ gc.create_bar_chart_from_df(
     palette="Set1",
 )
 ```
-![Multi-series bar chart showing stacked bars with palette defined.](img/stacked_with_annotations.png`)
+![Multi-series bar chart showing stacked bars with palette defined.](img/stacked_with_annotations.png)
 
 ### Adding a trendline
 
@@ -80,7 +80,7 @@ gc.create_bar_chart_from_df(
     trendline_palette=['black'],
 )
 ```
-![Single-series bar chart of tax credit applications by year with trendline](img/adding_trendline.png`)
+![Single-series bar chart of tax credit applications by year with trendline](img/adding_trendline.png)
 
 ### Custom theming
 
@@ -103,7 +103,7 @@ gc.create_bar_chart_from_df(
 )
 ```
 
-![Multi-Series bar chart with grouped bars and custom theming](img/custom_theming.png`)
+![Multi-Series bar chart with grouped bars and custom theming](img/custom_theming.png)
 
 ## Parameter reference
 
