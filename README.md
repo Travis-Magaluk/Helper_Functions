@@ -6,6 +6,22 @@ A Python utility library for various processes at a state historic preservation 
 
 ---
 
+## Documentation
+
+**Full docs site:** https://travis-magaluk.github.io/Helper_Functions/
+
+Quick links:
+
+- [Getting Started](https://travis-magaluk.github.io/Helper_Functions/getting-started/)
+- [Audit Pipeline](https://travis-magaluk.github.io/Helper_Functions/audit/)
+- [Database Connections](https://travis-magaluk.github.io/Helper_Functions/database/)
+- [Data Cleaning](https://travis-magaluk.github.io/Helper_Functions/data_cleaning/)
+- [DataFrame Comparison](https://travis-magaluk.github.io/Helper_Functions/dataframe_comparison/)
+- [Reporting — Bar Charts](https://travis-magaluk.github.io/Helper_Functions/reporting/bar-charts/)
+- [Reporting — Regression & Trends](https://travis-magaluk.github.io/Helper_Functions/reporting/regression-and-trends/)
+
+---
+
 ## Package Structure
 
 ```
@@ -167,7 +183,7 @@ Key functions:
 | `standardize_nps_quarterly_reports()` | `commercial_audit` | Normalize raw NPS sheet |
 | `find_missing_decisions_with_date_buffer()` | `commercial_audit` | Core diff logic |
 
-See [`docs/audit/`](docs/audit/index.md) for detailed function reference.
+See the [audit docs](https://travis-magaluk.github.io/Helper_Functions/audit/) for detailed function reference.
 
 ### `database/`
 
@@ -180,19 +196,19 @@ db = DBConnector()
 df = db.fetch_data("SELECT TOP 10 * FROM tblTaxCreditCommercial")
 ```
 
-See [`docs/database/`](docs/database/index.md).
+See the [database docs](https://travis-magaluk.github.io/Helper_Functions/database/).
 
 ### `reporting/`
 
 Publication-quality charts built on Matplotlib. `graph_creation_2.py` exposes a single highly-parameterized function for bar charts; `regression_analysis.py` provides scatter/OLS plots and automated trend ranking. Used to standardize graphs and charts created across reporting projects. 
 
-See [`docs/reporting/`](docs/reporting/index.md).
+See the [reporting docs](https://travis-magaluk.github.io/Helper_Functions/reporting/).
 
 ### `data_cleaning/`
 
 Standalone, NaN-safe text and data cleaning utilities designed for address normalization, monetary value parsing, and date conversion. Functions are designed to work with `df.apply()`.
 
-See [`docs/data_cleaning/`](docs/data_cleaning/index.md).
+See the [data cleaning docs](https://travis-magaluk.github.io/Helper_Functions/data_cleaning/).
 
 ### `dataframe_comparison/`
 
@@ -200,7 +216,7 @@ A framework for comparing two DataFrames column-by-column (string or numerical, 
 
 > **Note:** `legacy_comp_cols.py` is an older pipeline kept for reference. Prefer `compare_columns.py` and `difference_reporting.py` for new work.
 
-See [`docs/dataframe_comparison/`](docs/dataframe_comparison/index.md).
+See the [dataframe comparison docs](https://travis-magaluk.github.io/Helper_Functions/dataframe_comparison/).
 
 ---
 
