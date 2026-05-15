@@ -1,0 +1,71 @@
+# -----------------------
+# PYTHON
+# -----------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.env
+.venv/
+env/
+venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# -----------------------
+# IDE / EDITOR CONFIGS
+# -----------------------
+.vscode/
+.idea/
+*.swp
+
+# -----------------------
+# SYSTEM FILES
+# -----------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -----------------------
+# LOGS / TEMP FILES
+# -----------------------
+*.log
+*.tmp
+
+# -----------------------
+# DATABASE / SERIALIZED OBJECTS
+# -----------------------
+*.sqlite
+*.db
+*.pkl
+*.joblib
+
+# -----------------------
+# DATA FILES
+# -----------------------
+# Ignore all by default
+*.csv
+*.tsv
+*.parquet
+
+# -----------------------
+# EXCEL / OFFICE FILES
+# -----------------------
+# Keep deliverables in OneDrive instead of Git 
+*.xlsx 
+*.xlsm 
+*.xlsb 
+*.ods 
+*.pptx 
+*.ppt
+
+# -----------------------
+# ONE DRIVE SYNC FILES
+# -----------------------
+~$*
+
+CLAUDE.md

@@ -1,0 +1,52 @@
+site_name: Helper Functions
+site_description: Python utilities for auditing commercial historic tax credit data
+site_author: Travis Magaluk
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: green
+      accent: amber
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.details
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Reporting:
+    - Overview: reporting/index.md
+    - Bar Charts: reporting/bar-charts.md
+    - Regression & Trends: reporting/regression-and-trends.md
+  - Database:
+    - Connections: database/index.md
+  - Audit:
+    - Overview: audit/index.md
+    - Pipeline Functions: audit/pipeline.md
+    - Core Helpers: audit/helpers.md
+    - Configuration Constants: audit/configuration.md
+  - Data Cleaning:
+    - Overview: data_cleaning/index.md
+    - Text Cleaning: data_cleaning/text-cleaning.md
+    - Money & Dates: data_cleaning/money-and-dates.md
+    - Column Splitting: data_cleaning/column-splitting.md
+  - DataFrame Comparison:
+    - Overview: dataframe_comparison/index.md
+    - Comparing Columns: dataframe_comparison/comparing-columns.md
+    - Difference Reporting: dataframe_comparison/difference-reporting.md
