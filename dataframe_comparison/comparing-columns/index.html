@@ -1,0 +1,1710 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python utilities for auditing commercial historic tax credit data">
+      
+      
+        <meta name="author" content="Travis Magaluk">
+      
+      
+        <link rel="canonical" href="https://travis-magaluk.github.io/Helper_Functions/dataframe_comparison/comparing-columns/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../difference-reporting/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Comparing Columns - Helper Functions</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#comparing-columns" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Helper Functions" class="md-header__button md-logo" aria-label="Helper Functions" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Helper Functions
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Comparing Columns
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reporting/" class="md-tabs__link">
+          
+  
+  
+  Reporting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../database/" class="md-tabs__link">
+          
+  
+  
+  Database
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../audit/" class="md-tabs__link">
+          
+  
+  
+  Audit
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../data_cleaning/" class="md-tabs__link">
+          
+  
+  
+  Data Cleaning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  DataFrame Comparison
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Helper Functions" class="md-nav__button md-logo" aria-label="Helper Functions" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Helper Functions
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reporting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reporting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reporting/bar-charts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bar Charts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reporting/regression-and-trends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regression & Trends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Database
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Audit
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../audit/pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../audit/helpers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Helpers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../audit/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration Constants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Cleaning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Cleaning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_cleaning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_cleaning/text-cleaning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text Cleaning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_cleaning/money-and-dates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Money & Dates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_cleaning/column-splitting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Column Splitting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataFrame Comparison
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DataFrame Comparison
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparing Columns
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparing Columns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#run_comparison_and_reorder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_comparison_and_reorder()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="run_comparison_and_reorder()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strict-nan-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strict NaN mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate_comparison_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        generate_comparison_dict()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="generate_comparison_dict()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defaults
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rename_columns_with_prefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rename_columns_with_prefix()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#low-level-comparison-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Low-level comparison functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Low-level comparison functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compare_string_columnsrow-column_1-column_2-default_first-strict_nan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_string_columns(row, column_1, column_2, default_first, strict_nan)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compare_numerical_columnsrow-column_1-column_2-margin-default_first-strict_nan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_numerical_columns(row, column_1, column_2, margin, default_first, strict_nan)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compare_zip_codesrow-column_1-column_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_zip_codes(row, column_1, column_2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compare_decsision_daterow-decision_1_col-decision_date_1_col-decision_2_col-decision_date_2_col-day_margin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_decsision_date(row, decision_1_col, decision_date_1_col, decision_2_col, decision_date_2_col, day_margin)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create_new_dataframe_with_new_columns_only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_new_dataframe_with_new_columns_only()
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../difference-reporting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Difference Reporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#run_comparison_and_reorder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_comparison_and_reorder()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="run_comparison_and_reorder()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strict-nan-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strict NaN mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate_comparison_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        generate_comparison_dict()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="generate_comparison_dict()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defaults
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rename_columns_with_prefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rename_columns_with_prefix()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#low-level-comparison-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Low-level comparison functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Low-level comparison functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compare_string_columnsrow-column_1-column_2-default_first-strict_nan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_string_columns(row, column_1, column_2, default_first, strict_nan)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compare_numerical_columnsrow-column_1-column_2-margin-default_first-strict_nan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_numerical_columns(row, column_1, column_2, margin, default_first, strict_nan)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compare_zip_codesrow-column_1-column_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_zip_codes(row, column_1, column_2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compare_decsision_daterow-decision_1_col-decision_date_1_col-decision_2_col-decision_date_2_col-day_margin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compare_decsision_date(row, decision_1_col, decision_date_1_col, decision_2_col, decision_date_2_col, day_margin)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create_new_dataframe_with_new_columns_only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_new_dataframe_with_new_columns_only()
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="comparing-columns">Comparing Columns<a class="headerlink" href="#comparing-columns" title="Permanent link">&para;</a></h1>
+<p><strong>Module:</strong> <code>Helper_Functions.dataframe_comparison.compare_columns</code></p>
+<hr />
+<h2 id="run_comparison_and_reorder"><code>run_comparison_and_reorder()</code><a class="headerlink" href="#run_comparison_and_reorder" title="Permanent link">&para;</a></h2>
+<p>The main entry point: applies all comparisons defined in <code>comp_dict</code>, creates new reconciled columns, and reorders the DataFrame so each reconciled column sits directly after the two source columns it was derived from.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">Helper_Functions.dataframe_comparison.compare_columns</span> <span class="k">as</span> <span class="nn">cc</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">compared_df</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">run_comparison_and_reorder</span><span class="p">(</span><span class="n">comp_dict</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+<p>Each key in <code>comp_dict</code> becomes a new column. The value in each row depends on how the two source values relate:</p>
+<ul>
+<li>The matching value if the two source columns agree (or are within the margin)</li>
+<li>The larger of the two values if a numerical pair is within <code>margin</code> but not exactly equal — the function favors the bigger figure</li>
+<li>The non-NaN value if exactly one side is NaN (default behavior)</li>
+<li><code>"DIFFERENT"</code> if they disagree beyond the margin and <code>default_first=False</code></li>
+<li>The left column's value if they disagree and <code>default_first=True</code></li>
+<li><code>np.nan</code> if both source values are NaN</li>
+<li><code>"Invalid Value"</code> (numerical only) if a value cannot be cast to <code>float</code></li>
+</ul>
+<p>Entries in <code>comp_dict</code> whose value is <code>None</code> are skipped — no column is created but the key still participates in the final column ordering.</p>
+<h3 id="strict-nan-mode">Strict NaN mode<a class="headerlink" href="#strict-nan-mode" title="Permanent link">&para;</a></h3>
+<p>By default, a NaN in one column and a value in the other is resolved by returning the non-NaN value. Pass <code>strict_nan_compare=True</code> to treat this case as <code>"DIFFERENT"</code> instead:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">compared_df</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">run_comparison_and_reorder</span><span class="p">(</span><span class="n">comp_dict</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">strict_nan_compare</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>Use this when a missing value on one side should be treated as a real disagreement rather than silently filled from the other side.</p>
+<hr />
+<h2 id="generate_comparison_dict"><code>generate_comparison_dict()</code><a class="headerlink" href="#generate_comparison_dict" title="Permanent link">&para;</a></h2>
+<p>Auto-generate a <code>comp_dict</code> template from a list of base column names. Each base name is paired with its prefixed left/right versions, so this works hand-in-hand with <code>rename_columns_with_prefix()</code> below.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RehabCost&quot;</span><span class="p">,</span> <span class="s2">&quot;Decision&quot;</span><span class="p">,</span> <span class="s2">&quot;ZipCode&quot;</span><span class="p">,</span> <span class="s2">&quot;ProjectNum&quot;</span><span class="p">]</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">comp_dict</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">generate_comparison_dict</span><span class="p">(</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">left_prefix</span><span class="o">=</span><span class="s2">&quot;XLSX_&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">right_prefix</span><span class="o">=</span><span class="s2">&quot;CRIS_&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">string_columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Decision&quot;</span><span class="p">},</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">none_columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ProjectNum&quot;</span><span class="p">},</span>   <span class="c1"># pass through without comparing</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">)</span>
+</code></pre></div>
+<p>This produces:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="s2">&quot;RehabCost&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;XLSX_RehabCost&quot;</span><span class="p">,</span> <span class="s2">&quot;CRIS_RehabCost&quot;</span><span class="p">],</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;numerical&quot;</span><span class="p">,</span> <span class="s2">&quot;margin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;default_first&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="s2">&quot;Decision&quot;</span><span class="p">:</span>  <span class="p">{</span><span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;XLSX_Decision&quot;</span><span class="p">,</span>  <span class="s2">&quot;CRIS_Decision&quot;</span><span class="p">],</span>  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>    <span class="s2">&quot;margin&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;default_first&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="s2">&quot;ZipCode&quot;</span><span class="p">:</span>   <span class="p">{</span><span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;XLSX_ZipCode&quot;</span><span class="p">,</span>   <span class="s2">&quot;CRIS_ZipCode&quot;</span><span class="p">],</span>   <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;numerical&quot;</span><span class="p">,</span> <span class="s2">&quot;margin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;default_first&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="s2">&quot;ProjectNum&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="defaults">Defaults<a class="headerlink" href="#defaults" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>"numerical"</code> unless the column is in <code>string_columns</code></td>
+</tr>
+<tr>
+<td><code>margin</code></td>
+<td><code>0</code> (exact match) for numerical entries; <code>None</code> for string entries</td>
+</tr>
+<tr>
+<td><code>default_first</code></td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>margin</code> and <code>default_first</code> can be tuned per-entry after generation — the function returns a regular dict you can edit.</p>
+<hr />
+<h2 id="rename_columns_with_prefix"><code>rename_columns_with_prefix()</code><a class="headerlink" href="#rename_columns_with_prefix" title="Permanent link">&para;</a></h2>
+<p>Add a prefix to all column names except those in <code>exclude_columns</code>. Use this before merging two DataFrames so their columns can be compared side by side.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">xlsx_df</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">rename_columns_with_prefix</span><span class="p">(</span><span class="n">xlsx_df</span><span class="p">,</span> <span class="n">prefix1</span><span class="o">=</span><span class="s2">&quot;XLSX_&quot;</span><span class="p">,</span> <span class="n">exclude_columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ProjectNum&quot;</span><span class="p">})</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">cris_df</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">rename_columns_with_prefix</span><span class="p">(</span><span class="n">cris_df</span><span class="p">,</span> <span class="n">prefix1</span><span class="o">=</span><span class="s2">&quot;CRIS_&quot;</span><span class="p">,</span> <span class="n">exclude_columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ProjectNum&quot;</span><span class="p">})</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">merged</span> <span class="o">=</span> <span class="n">xlsx_df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">cris_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;ProjectNum&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="low-level-comparison-functions">Low-level comparison functions<a class="headerlink" href="#low-level-comparison-functions" title="Permanent link">&para;</a></h2>
+<p>These are used internally by <code>run_comparison_and_reorder()</code> but can be called directly with <code>df.apply()</code>.</p>
+<h3 id="compare_string_columnsrow-column_1-column_2-default_first-strict_nan"><code>compare_string_columns(row, column_1, column_2, default_first, strict_nan)</code><a class="headerlink" href="#compare_string_columnsrow-column_1-column_2-default_first-strict_nan" title="Permanent link">&para;</a></h3>
+<p>Reconciles a pair of string columns row-by-row using the following resolution order:</p>
+<ol>
+<li>Values are equal → return that value.</li>
+<li>Both NaN → <code>np.nan</code>.</li>
+<li><code>strict_nan=True</code> and exactly one side is NaN → <code>"DIFFERENT"</code>.</li>
+<li>One side is NaN → return the non-NaN value.</li>
+<li>Otherwise the values disagree → return the left value if <code>default_first=True</code>, else <code>"DIFFERENT"</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;DecisionComp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">cc</span><span class="o">.</span><span class="n">compare_string_columns</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;XLSX_Decision&quot;</span><span class="p">,</span> <span class="s2">&quot;CRIS_Decision&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="compare_numerical_columnsrow-column_1-column_2-margin-default_first-strict_nan"><code>compare_numerical_columns(row, column_1, column_2, margin, default_first, strict_nan)</code><a class="headerlink" href="#compare_numerical_columnsrow-column_1-column_2-margin-default_first-strict_nan" title="Permanent link">&para;</a></h3>
+<p>Reconciles a pair of numerical columns with a percent-based tolerance. Resolution order:</p>
+<ol>
+<li>Both NaN → <code>np.nan</code>.</li>
+<li><code>strict_nan=True</code> and exactly one side is NaN → <code>"DIFFERENT"</code>.</li>
+<li>One side is NaN → return the non-NaN value.</li>
+<li>Either value cannot be cast to <code>float</code> → <code>"Invalid Value"</code>.</li>
+<li>Values are exactly equal → return that value.</li>
+<li>Relative difference (<code>abs(v1 - v2) / average</code>) is within <code>margin / 100</code> → return <code>max(v1, v2)</code>. The function favors the larger figure when both sources are "close enough."</li>
+<li>Otherwise → return the left value if <code>default_first=True</code>, else <code>"DIFFERENT"</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;CostComp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">cc</span><span class="o">.</span><span class="n">compare_numerical_columns</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;XLSX_Cost&quot;</span><span class="p">,</span> <span class="s2">&quot;CRIS_Cost&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>  <span class="c1"># 5% margin</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="compare_zip_codesrow-column_1-column_2"><code>compare_zip_codes(row, column_1, column_2)</code><a class="headerlink" href="#compare_zip_codesrow-column_1-column_2" title="Permanent link">&para;</a></h3>
+<p>Handles 5-digit and 9-digit (<code>XXXXX-XXXX</code>) ZIP codes. Hyphens and surrounding whitespace are stripped before length comparison, so two zip codes match when their first five digits agree. When one side is 9-digit and the other is 5-digit (and prefixes match), the 9-digit form is returned — the function prefers the more specific representation.</p>
+<p>Returns <code>"DIFFERENT"</code> when prefixes don't match or the lengths are unexpected. If a single side is NaN, the other side is returned; if both sides are NaN, the function falls through to <code>"DIFFERENT"</code>, so filter empty rows beforehand if you need <code>np.nan</code> there.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ZipComp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">cc</span><span class="o">.</span><span class="n">compare_zip_codes</span><span class="p">,</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;XLSX_Zip&quot;</span><span class="p">,</span> <span class="s2">&quot;CRIS_Zip&quot;</span><span class="p">),</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="compare_decsision_daterow-decision_1_col-decision_date_1_col-decision_2_col-decision_date_2_col-day_margin"><code>compare_decsision_date(row, decision_1_col, decision_date_1_col, decision_2_col, decision_date_2_col, day_margin)</code><a class="headerlink" href="#compare_decsision_daterow-decision_1_col-decision_date_1_col-decision_2_col-decision_date_2_col-day_margin" title="Permanent link">&para;</a></h3>
+<p>Reconciles a paired <em>(decision, date)</em> tuple from two sources. Returns a two-element <code>pd.Series</code> intended to be unpacked into two new DataFrame columns.</p>
+<p><strong>Decision resolution:</strong> both NaN → <code>np.nan</code>; one NaN → the non-NaN value; both equal → that value; both present and unequal → <code>"Different"</code>.</p>
+<p><strong>Date resolution</strong> (dates parsed with <code>pd.to_datetime(errors='coerce')</code>, so unparseable strings behave like NaN): both NaN → <code>np.nan</code>; one NaN → the other formatted <code>'%Y-%m-%d'</code>; within <code>day_margin</code> days → <code>date_1</code> formatted <code>'%Y-%m-%d'</code>; beyond <code>day_margin</code> → <code>"Date Mismatch"</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;DecisionFinal&quot;</span><span class="p">,</span> <span class="s2">&quot;DecisionDateFinal&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">cc</span><span class="o">.</span><span class="n">compare_decsision_date</span><span class="p">,</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;XLSX_Decision&quot;</span><span class="p">,</span> <span class="s2">&quot;XLSX_Date&quot;</span><span class="p">,</span> <span class="s2">&quot;CRIS_Decision&quot;</span><span class="p">,</span> <span class="s2">&quot;CRIS_Date&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>  <span class="c1"># 7-day tolerance</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="create_new_dataframe_with_new_columns_only"><code>create_new_dataframe_with_new_columns_only()</code><a class="headerlink" href="#create_new_dataframe_with_new_columns_only" title="Permanent link">&para;</a></h2>
+<p>Reduce the compared DataFrame to only the reconciled columns (keys of <code>comp_dict</code>). Includes both reconciled comparison columns and any "stand-alone" identifier keys (entries whose value is <code>None</code>).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">summary_df</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">create_new_dataframe_with_new_columns_only</span><span class="p">(</span><span class="n">comp_dict</span><span class="p">,</span> <span class="n">compared_df</span><span class="p">)</span>
+</code></pre></div>
+<p>Typically called after <code>run_comparison_and_reorder()</code> and any manual review, when the full source columns are no longer needed.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
